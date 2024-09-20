@@ -1,0 +1,42 @@
+name: Splatoon 2 Data Uploader
+
+on:
+  schedule:
+    - cron: '0 0-23/2 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+      ACC_LOC: ${{ secrets.ACC_LOC }}
+      GTOKEN: ${{ secrets.GTOKEN }}
+      SESSION_TOKEN: ${{ secrets.SESSION_TOKEN }}
+      
+    name: Splatoon 2 Data Uploader
+    steps:
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Checkout frozenpandaman/splatnet2statink
+        uses: actions/checkout@v3
+        with:
+          repository: 'frozenpandaman/splatnet2statink'
+          path: s2s
+
+      - name: Generate config.txt
+        working-directory: s2s
+        run: |
+          echo '{"api_key": "${{ env.API_KEY }}", "cookie": "${{ env.GTOKEN }}", "session_token": "${{ env.SESSION_TOKEN }}", "acc_loc": "${{ env.ACC_LOC }}" }' > config.txt
+          cat config.txt
+      - name: Install splatnet2statink requirements
+        working-directory: s2s
+        run: |
+          pip install -r requirements.txt
+      - name: Run splatnet2statink
+        working-directory: s2s
+        run: |
+          python3 splatnet2statink.py -r
