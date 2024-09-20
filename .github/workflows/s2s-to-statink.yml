@@ -30,7 +30,7 @@ jobs:
       - name: Generate config.txt
         working-directory: s2s
         run: |
-          echo '{"api_key": "${{ env.API_KEY }}", "cookie": "${{ env.GTOKEN }}", "session_token": "${{ env.SESSION_TOKEN }}", "acc_loc": "${{ env.ACC_LOC }}" }' > config.txt
+          echo '{"api_key": "${{ env.API_KEY }}", "cookie": "${{ env.GTOKEN }}", "session_token": "${{ env.SESSION_TOKEN }}", "user_lang": "${{ env.ACC_LOC }}" }' > config.txt
           cat config.txt
       - name: Install splatnet2statink requirements
         working-directory: s2s
