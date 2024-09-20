@@ -40,3 +40,7 @@ jobs:
         working-directory: s2s
         run: |
           python3 splatnet2statink.py -r
+      - name: Run splatnet2statink (Salmon Run)
+        working-directory: s2s
+        run: |
+          python3 splatnet2statink.py -r --salmon
