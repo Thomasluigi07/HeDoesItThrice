@@ -1,4 +1,4 @@
-name: Splatoon3 Battlelog Uplorder
+name: Splatoon 3 Data Uploader
 
 on:
   schedule:
